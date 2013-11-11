@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   <display-name>bpmcenter</display-name>
+    <distributable />
   <!-- Spring加载配置 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -16,6 +17,61 @@
     <param-value>classpath*:applicationContext*.xml</param-value>
   </context-param>
   <!-- 登录用servlet -->
+  
+  	<context-param>
+		<description>Vaadin production mode</description>
+		<param-name>productionMode</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- To load the Spring context -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- To allow session-scoped beans in Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+
+	<servlet>
+		<servlet-name>Vaadin Application Servlet</servlet-name>
+		<servlet-class>org.activiti.explorer.servlet.ExplorerApplicationServlet</servlet-class>
+		<init-param>
+			<param-name>widgetset</param-name>
+			<param-value>org.activiti.explorer.CustomWidgetset</param-value>
+		</init-param>
+	</servlet>
+
+	<!-- Restlet adapter, used to expose modeler functionality through REST -->
+	<servlet>
+		<servlet-name>RestletServlet</servlet-name>
+		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+		<init-param>
+			<!-- Application class name -->
+			<param-name>org.restlet.application</param-name>
+			<param-value>org.activiti.rest.explorer.application.ExplorerRestApplication</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Vaadin Application Servlet</servlet-name>
+		<url-pattern>/ui/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Vaadin Application Servlet</servlet-name>
+		<url-pattern>/VAADIN/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Catch all service requests -->
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+	
+	
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -27,6 +83,43 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <description></description>
+    <display-name>testServlet</display-name>
+    <servlet-name>testServlet</servlet-name>
+    <servlet-class>com.founder.fix.fixflow.TestServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testServlet</servlet-name>
+    <url-pattern>/testServlet</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <description></description>
+    <display-name>pluginServlet</display-name>
+    <servlet-name>pluginServlet</servlet-name>
+    <servlet-class>com.founder.fix.fixflow.pluginServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>pluginServlet</servlet-name>
+    <url-pattern>/pluginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>stencilsetServlet</display-name>
+    <servlet-name>stencilsetServlet</servlet-name>
+    <servlet-class>com.founder.fix.fixflow.stencilsetServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>stencilsetServlet</servlet-name>
+    <url-pattern>/stencilsetServlet</url-pattern>
+  </servlet-mapping>
+  
   <!-- 任务处理中心配置 -->
   <servlet>
     <description></description>
