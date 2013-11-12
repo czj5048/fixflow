@@ -1876,7 +1876,7 @@ ORYX.CONFIG.SERVER_MODEL_HANDLER =		ORYX.CONFIG.SERVER_HANDLER_ROOT + "/model";
 ORYX.CONFIG.STENCILSET_HANDLER = 		ORYX.CONFIG.SERVER_HANDLER_ROOT + "/editor_stencilset?embedsvg=true&url=true&namespace=";    
 ORYX.CONFIG.STENCIL_SETS_URL = 			ORYX.CONFIG.SERVER_HANDLER_ROOT + "/editor_stencilset";
 
-ORYX.CONFIG.PLUGINS_CONFIG =			"../pluginServlet";
+ORYX.CONFIG.PLUGINS_CONFIG =			"../../PluginServlet";
 ORYX.CONFIG.SYNTAXCHECKER_URL =			ORYX.CONFIG.SERVER_HANDLER_ROOT + "/syntaxchecker";
 ORYX.CONFIG.DEPLOY_URL = 				ORYX.CONFIG.SERVER_HANDLER_ROOT + "/model/deploy";
 ORYX.CONFIG.MODEL_LIST_URL = 			ORYX.CONFIG.SERVER_HANDLER_ROOT + "/models";
@@ -8471,7 +8471,7 @@ ORYX.Core.StencilSet.StencilSet = Clazz.extend({
 		if(ORYX.CONFIG.BACKEND_SWITCH) {
 			this._baseUrl = "../editor/stencilsets/bpmn2.0/";
 			this._source = "../stencilsets/bpmn2.0/bpmn2.0.json";
-			new Ajax.Request("../stencilsetServlet", {
+			new Ajax.Request("../../StencilsetServlet", {
 	            asynchronous: false,
 	            method: 'get',
 	            onSuccess: this._init.bind(this),
@@ -11195,7 +11195,7 @@ function init() {
 			modelUrl = modelUrl.replace("/self","/json");
 		} else {
 			var modelId = window.location.search.substring(4);
-			modelUrl = "../testServlet";
+			modelUrl = "../../ModelConverter";
 		}
 
         ORYX.Editor.createByUrl(modelUrl, {
